@@ -1,3 +1,5 @@
+Index is at [Last](#-full-topic-list-for-sql-learning-recommended-path)
+
 #### Tech Words
 - syntax, indentation, parser, attributes
 
@@ -62,7 +64,7 @@ CREATE TABLE Customers (
 
 ---
 
-## 📂 Showing Databases and Tables
+#### 📂 Showing Databases and Tables
 - **List all databases**:
   ```sql
   SELECT name FROM sys.databases;
@@ -76,7 +78,7 @@ CREATE TABLE Customers (
 
 ---
 
-## 🏗️ CREATE TABLE Syntax
+#### 🏗️ CREATE TABLE Syntax
 Basic syntax in SQL Server:
 ```sql
 CREATE TABLE schema_name.table_name (
@@ -87,7 +89,7 @@ CREATE TABLE schema_name.table_name (
 );
 ```
 
-### Example:
+#### Example:
 ```sql
 CREATE TABLE dbo.Employees (
     EmployeeID INT PRIMARY KEY,
@@ -100,7 +102,7 @@ CREATE TABLE dbo.Employees (
 
 ---
 
-## 🔢 SQL Server Data Types & Attributes
+#### 🔢 SQL Server Data Types & Attributes
 SQL Server supports multiple categories:
 
 | Category        | Examples | Notes |
@@ -111,29 +113,29 @@ SQL Server supports multiple categories:
 | **Binary**      | `VARBINARY`, `IMAGE` (deprecated) | For files, blobs |
 | **Other**       | `BIT`, `UNIQUEIDENTIFIER`, `XML`, `JSON` (via NVARCHAR) | Special use cases |
 
-### INT vs BIGINT
+#### INT vs BIGINT
  - INT: 4 bytes, range: –2,147,483,648 to 2,147,483,647.
  - BIGINT: 8 bytes, range: –9,223,372,036,854,775,808 to 9,223,372,036,854,775,807.
  - Use INT for most IDs and counts; BIGINT when values can exceed 2 billion.
 
 *DECIMAL(p, s)* : Fixed precision and scale, p = total digits, s = digits after decimal.
 
-### CHAR(n), VARCHAR(n), NVARCHAR(n)
+#### CHAR(n), VARCHAR(n), NVARCHAR(n)
  - CHAR(n): Fixed length. Always stores n characters (pads with spaces).
  - VARCHAR(n): Variable length. Stores only actual characters.
  - NVARCHAR(n): Like VARCHAR, but supports Unicode (international characters).
 
-### DATE, DATETIME, DATETIME2, TIME
+#### DATE, DATETIME, DATETIME2, TIME
  - DATE: Only date (YYYY-MM-DD). -- '2026-01-20'
  - DATETIME: Date + time, accuracy ~3.33 ms, range 1753–9999. -- '2026-01-20 14:27:00.123'
  - DATETIME2: Improved DATETIME, accuracy 100 ns, larger range. -- '2026-01-20 14:27:00.1234567'
  - TIME: Only time of day. -- '14:27:00'
 
-### VARBINARY vs IMAGE
+#### VARBINARY vs IMAGE
  - VARBINARY(n): Variable-length binary data (up to 2 GB with VARBINARY(MAX)).
  - IMAGE: Deprecated, older type for large binary objects. Use VARBINARY(MAX) instead.
 
-### ⚙️ Other Special Types
+#### ⚙️ Other Special Types
  - BIT: Boolean-like: 0, 1, or NULL.
  - UNIQUEIDENTIFIER: Stores a GUID (Globally Unique Identifier).
  - XML: Stores XML data, can be queried with XQuery.
@@ -196,7 +198,7 @@ You can check detailed explanation of Attributes and Constraints [here.](./attri
 
 ---
 
-## 📝 Naming Rules & Conventions
+#### 📝 Naming Rules & Conventions
 SQL Server naming rules:
 - **Databases, tables, columns:**
   - Must start with a letter or underscore.
@@ -209,6 +211,60 @@ SQL Server naming rules:
   - Prefix tables with schema (`dbo.Employees`).
   - Use meaningful names (avoid `temp1`, `new_table`).
   - Plural vs singular: choose one style and stick to it (e.g., `Employees` vs `Employee`).
+
+### 5. 📂 Categories of SQL Commands
+
+| Acronym | Full Form | Purpose | Examples |
+|---------|------------|---------|----------|
+| **DDL** | Data Definition Language | Defines and manages database structure (schema) | `CREATE`, `ALTER`, `DROP`, `TRUNCATE` |
+| **DML** | Data Manipulation Language | Deals with inserting, updating, deleting data inside tables | `INSERT`, `UPDATE`, `DELETE`, `MERGE` |
+| **DQL** | Data Query Language | Focuses on querying/retrieving data | `SELECT` |
+| **DCL** | Data Control Language | Controls access and permissions | `GRANT`, `REVOKE` |
+| **TCL** | Transaction Control Language | Manages transactions to ensure data integrity | `COMMIT`, `ROLLBACK`, `SAVEPOINT`, `SET TRANSACTION` |
+
+---
+
+#### 🧩 Where They Fit In
+- **DDL** → Think of it as the *blueprint* stage (designing tables, schemas).
+- **DML** → The *action* stage (actually putting data in or changing it).
+- **DQL** → The *questioning* stage (asking the database for information).
+- **DCL** → The *security* stage (who can do what).
+- **TCL** → The *safety net* stage (ensuring changes are consistent and reversible).
+
+---
+
+#### 🎯 Example Flow
+Imagine you’re building a library database:
+
+1. **DDL**:  
+   ```sql
+   CREATE TABLE Books (
+       BookID INT PRIMARY KEY,
+       Title VARCHAR(100),
+       Author VARCHAR(100)
+   );
+   ```
+
+2. **DML**:  
+   ```sql
+   INSERT INTO Books VALUES (1, 'SQL Basics', 'John Doe');
+   ```
+
+3. **DQL**:  
+   ```sql
+   SELECT * FROM Books;
+   ```
+
+4. **DCL**:  
+   ```sql
+   GRANT SELECT ON Books TO user123;
+   ```
+
+5. **TCL**:  
+   ```sql
+   COMMIT;  -- Save changes permanently
+   ROLLBACK; -- Undo changes if needed
+   ```
 
 ---
 
@@ -235,40 +291,43 @@ Here’s a structured roadmap you can compare with your own list:
    - Creating databases and tables
    - Data types
    - Constraints (PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK, DEFAULT)
+   - Naming Rules & Conventions
 
-5. **Joins & Relationships**
+5. [**Categories of SQL Commands**](#5--categories-of-sql-commands)
+   - DDL, DQL, DML, TCL, DCL
+   - Example
+
+6. **Joins & Relationships**
    - INNER, LEFT, RIGHT, FULL joins
    - Normalization and relationships
 
-6. **Advanced Queries**
+7. **Advanced Queries**
    - GROUP BY, HAVING
    - Aggregate functions (SUM, COUNT, AVG, MIN, MAX)
    - Subqueries
 
-7. **Indexes & Performance**
+8. **Indexes & Performance**
    - Clustered vs non-clustered indexes
    - Query optimization basics
 
-8. **Views & Stored Procedures**
+9. **Views & Stored Procedures**
    - Creating views
    - Writing stored procedures and functions
 
-9. **Transactions & Security**
+10. **Transactions & Security**
    - COMMIT, ROLLBACK
    - ACID properties
    - User roles and permissions
 
-10. **Backup & Restore**
+11. **Backup & Restore**
     - BACKUP DATABASE
     - RESTORE DATABASE
 
-11. **Advanced Topics (Optional)**
+12. **Advanced Topics (Optional)**
     - Triggers
     - Window functions
     - CTEs (Common Table Expressions)
 
 ---
 
-✅ This roadmap ensures you cover **fundamentals first** (intro, CRUD, tables) and then progress to **intermediate and advanced topics** like joins, transactions, and optimization.  
-
-Would you like me to turn this into a **step-by-step study plan with exercises** (like practice queries for each topic) so you can learn by doing in SSMS?
+✅ This roadmap ensures you cover **fundamentals first** (intro, CRUD, tables) and then progress to **intermediate and advanced topics** like joins, transactions, and optimization.
